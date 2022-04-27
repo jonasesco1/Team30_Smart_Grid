@@ -1,0 +1,3 @@
+Change Component Footprint: Designator=C2 Old Footprint=BCAP New Footprint=CapBig
+Change Component Footprint: Designator=C3 Old Footprint=BCAP New Footprint=CapBig
+Added Room: Name=TLine

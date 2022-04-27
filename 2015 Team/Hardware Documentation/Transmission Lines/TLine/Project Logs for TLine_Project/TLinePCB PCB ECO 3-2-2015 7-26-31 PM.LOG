@@ -1,0 +1,3 @@
+Added Component: Designator=R1(PCBComponent_1)
+Added Member To Class: ClassName=TLine Member=Component R1 Res1
+Added Room: Name=TLine

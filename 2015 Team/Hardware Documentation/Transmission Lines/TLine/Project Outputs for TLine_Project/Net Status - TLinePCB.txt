@@ -1,0 +1,24 @@
+Net Status Report
+Filename     : \\ad\eng\users\e\t\etl\My Documents\Altium\TLine\TLinePCB.PcbDoc
+Date         : 3/14/2015
+Time         : 9:35:35 PM
+Time Elapsed : 00:00:00
+
+Nets, Layer, Length
+    GND, Signal Layers Only, 2565.233mils
+    NetC1_2, Signal Layers Only, 3684.346mils
+    NetC2_2, Signal Layers Only, 2029.842mils
+    NetC3_2, Signal Layers Only, 3207.588mils
+    NetC4_2, Signal Layers Only, 1841.919mils
+    NetIN1_1, Signal Layers Only, 2313.793mils
+    NetIN2_1, Signal Layers Only, 2479.787mils
+    NetL1_1, Signal Layers Only, 813.022mils
+    NetL2_2, Signal Layers Only, 499.921mils
+    NetL3_1, Signal Layers Only, 1429.433mils
+    NetL4_2, Signal Layers Only, 676.249mils
+    NetR1_1, Signal Layers Only, 600.701mils
+    NetR2_2, Signal Layers Only, 1382.292mils
+    NetR3_1, Signal Layers Only, 590.945mils
+    NetR4A_2, Signal Layers Only, 600.472mils
+    NetR4B_2, Signal Layers Only, 1509.782mils
+count : 16

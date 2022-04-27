@@ -1,0 +1,13 @@
+Change Component DesignItemId : Designator=IN1 Old DesignItemId=Header 2X2 New DesignItemId=Header 2
+Change Component DesignItemId : Designator=IN2 Old DesignItemId=Header 2X2 New DesignItemId=Header 2
+Change Component Comment : Designator=IN1 Old Comment=Header 2X2 New Comment=Header 2
+Change Component Comment : Designator=IN2 Old Comment=Header 2X2 New Comment=Header 2
+Change Component Description : Designator=IN1 Old Description=Header, 2-Pin, Dual row New Description=Header, 2-Pin
+Change Component Description : Designator=IN2 Old Description=Header, 2-Pin, Dual row New Description=Header, 2-Pin
+Added Pin To Net: NetName=GND Pin=IN1-2
+Added Pin To Net: NetName=GND Pin=IN2-2
+Added Pin To Net: NetName=NetIN1_1 Pin=IN1-1
+Added Pin To Net: NetName=NetIN1_1 Pin=SW1-1
+Added Pin To Net: NetName=NetIN1_1 Pin=SW2-1
+Added Net: Name=NetIN1_1
+Added Room: Name=TLine

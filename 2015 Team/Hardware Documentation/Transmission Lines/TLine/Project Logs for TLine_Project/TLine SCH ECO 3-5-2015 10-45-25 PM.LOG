@@ -1,0 +1,6 @@
+Change Component Footprint: Designator=C2 Old Footprint=BigCap New Footprint=SmallCap
+Change Component Footprint: Designator=C3 Old Footprint=BigCap New Footprint=SmallCap
+Change Component Footprint: Designator=C1 Old Footprint=SmallCap New Footprint=BigCap
+Change Component Footprint: Designator=C4 Old Footprint=SmallCap New Footprint=BigCap
+Change Component Comment: Designator=IN1 Old Comment=Header 2 New Comment=Header 2X2
+Change Component Comment: Designator=IN2 Old Comment=Header 2 New Comment=Header 2X2

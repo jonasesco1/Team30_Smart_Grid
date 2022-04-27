@@ -1,0 +1,14 @@
+Added Component: Designator=R1(PCBComponent_1)
+Added Component: Designator=R2(AXIAL-0.3)
+Added Component: Designator=R3(AXIAL-0.3)
+Added Pin To Net: NetName=GND Pin=R3-1
+Added Net: Name=GND
+Added Pin To Net: NetName=NetR1_2 Pin=R2-1
+Added Net: Name=NetR1_2
+Added Pin To Net: NetName=NetR2_2 Pin=R2-2
+Added Pin To Net: NetName=NetR2_2 Pin=R3-2
+Added Net: Name=NetR2_2
+Added Member To Class: ClassName=TLine Member=Component R1 Res1
+Added Member To Class: ClassName=TLine Member=Component R2 Res1
+Added Member To Class: ClassName=TLine Member=Component R3 Res1
+Added Room: Name=TLine

@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: TLinePCB.PcbDoc   3/15/2015  1:33:22 PM
+---------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : TLinePCB.TXT
+EIA File   : TLinePCB.DRL
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        28mil (0.7112mm)         Round          1                0.00 Inch (0.00 mm)
+T2        50mil (1.27mm)           Round          12               9.42 Inch (239.27 mm)
+T3        60mil (1.524mm)          Round          8                12.36 Inch (314.00 mm)
+T4        100mil (2.54mm)          Round          12               13.56 Inch (344.54 mm)
+---------------------------------------------------------------------------
+Totals                                            33               35.35 Inch (897.81 mm)
+
+Total Processing Time (hh:mm:ss) : 00:00:00

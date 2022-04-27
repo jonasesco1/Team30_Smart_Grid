@@ -1,0 +1,3 @@
+Change Component Footprint: Designator=LOAD1 Old Footprint=TB New Footprint=CAPhoriz
+Change Component Footprint: Designator=LOAD2 Old Footprint=TB New Footprint=CAPhoriz
+Added Room: Name=TLine

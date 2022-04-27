@@ -1,0 +1,3 @@
+Change Component Footprint: Designator=C1 Old Footprint=CAPM4555X18N New Footprint=Cap14
+Change Component Footprint: Designator=C4 Old Footprint=CAPM4555X18N New Footprint=Cap14
+Added Room: Name=TLine

@@ -1,0 +1,4 @@
+Change Component Footprint: Designator=LOAD1 Old Footprint=TB New Footprint=TBHoriz
+Change Component Footprint: Designator=LOAD2 Old Footprint=TB New Footprint=TBHoriz
+Added Member To Class: ClassName=TLine Member=Component LOAD1 Header 2
+Added Room: Name=TLine

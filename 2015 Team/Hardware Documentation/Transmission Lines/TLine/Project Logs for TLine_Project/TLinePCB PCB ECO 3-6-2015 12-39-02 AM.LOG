@@ -1,0 +1,7 @@
+Change Component Footprint: Designator=C1 Old Footprint=BIGCAP New Footprint=CAPM4555X18N
+Change Component Footprint: Designator=C4 Old Footprint=BIGCAP New Footprint=CAPM4555X18N
+Added Pin To Net: NetName=GND Pin=C1-1
+Added Pin To Net: NetName=NetC1_2 Pin=C1-2
+Added Pin To Net: NetName=GND Pin=C4-1
+Added Pin To Net: NetName=NetC4_2 Pin=C4-2
+Added Room: Name=TLine

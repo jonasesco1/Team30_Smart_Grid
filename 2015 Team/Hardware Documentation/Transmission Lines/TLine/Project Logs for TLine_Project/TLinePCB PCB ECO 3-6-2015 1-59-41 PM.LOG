@@ -1,0 +1,15 @@
+Removed Pin From Net: NetName=NetC1_2 Pin=TB12-1
+Removed Pin From Net: NetName=GND Pin=TB12-2
+Removed Pin From Net: NetName=NetC3_2 Pin=TB34-1
+Removed Pin From Net: NetName=GND Pin=TB34-2
+Removed Member From Class: ClassName=TLine Member=TB12
+Removed Member From Class: ClassName=TLine Member=TB34
+Added Component: Designator=LOAD1(TB)
+Added Component: Designator=LOAD2(TB)
+Added Pin To Net: NetName=NetC1_2 Pin=LOAD1-1
+Added Pin To Net: NetName=GND Pin=LOAD1-2
+Added Pin To Net: NetName=NetC3_2 Pin=LOAD2-1
+Added Pin To Net: NetName=GND Pin=LOAD2-2
+Added Member To Class: ClassName=TLine Member=Component LOAD1 Header 2
+Added Member To Class: ClassName=TLine Member=Component LOAD2 Header 2
+Added Room: Name=TLine

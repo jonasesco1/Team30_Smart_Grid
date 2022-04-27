@@ -1,0 +1,89 @@
+Added Component: Designator=C1(BigCap)
+Added Component: Designator=C2(SmallCap)
+Added Component: Designator=C3(SmallCap)
+Added Component: Designator=C4(BigCap)
+Added Component: Designator=IN1(TB)
+Added Component: Designator=IN2(TB)
+Added Component: Designator=L1(Inductor1)
+Added Component: Designator=L2(Inductor1)
+Added Component: Designator=L3(Inductor1)
+Added Component: Designator=L4(Inductor4)
+Added Component: Designator=R1(PCBComponent_1)
+Added Component: Designator=R2(Resistor3)
+Added Component: Designator=R3(Resistor3)
+Added Component: Designator=R4A(Resistor3)
+Added Component: Designator=R4B(Resistor3)
+Added Component: Designator=S1(Switch)
+Added Component: Designator=S2(Switch)
+Added Component: Designator=S3(Switch)
+Added Component: Designator=S4(Switch)
+Added Component: Designator=S5(Switch)
+Added Component: Designator=S6(Switch)
+Added Component: Designator=TB12(TB)
+Added Component: Designator=TB34(TB)
+Added Pin To Net: NetName=NetR2_2 Pin=S5-1
+Added Pin To Net: NetName=NetC1_2 Pin=L1-2
+Added Pin To Net: NetName=NetC1_2 Pin=TB12-1
+Added Net: Name=NetC1_2
+Added Pin To Net: NetName=NetC2_2 Pin=L2-1
+Added Pin To Net: NetName=NetC2_2 Pin=S6-2
+Added Net: Name=NetC2_2
+Added Pin To Net: NetName=NetC3_2 Pin=L3-2
+Added Pin To Net: NetName=NetC3_2 Pin=TB34-1
+Added Net: Name=NetC3_2
+Added Pin To Net: NetName=NetC4_2 Pin=L4-1
+Added Pin To Net: NetName=NetC4_2 Pin=S3-2
+Added Net: Name=NetC4_2
+Added Pin To Net: NetName=NetIN1_2 Pin=IN1-2
+Added Pin To Net: NetName=NetIN1_2 Pin=S1-1
+Added Pin To Net: NetName=NetIN1_2 Pin=S2-1
+Added Net: Name=NetIN1_2
+Added Pin To Net: NetName=NetIN2_1 Pin=IN2-1
+Added Pin To Net: NetName=NetIN2_1 Pin=S4-2
+Added Pin To Net: NetName=NetIN2_1 Pin=S5-2
+Added Net: Name=NetIN2_1
+Added Pin To Net: NetName=NetL1_1 Pin=L1-1
+Added Net: Name=NetL1_1
+Added Pin To Net: NetName=NetL2_2 Pin=L2-2
+Added Net: Name=NetL2_2
+Added Pin To Net: NetName=NetL3_1 Pin=L3-1
+Added Net: Name=NetL3_1
+Added Pin To Net: NetName=NetL4_2 Pin=L4-2
+Added Net: Name=NetL4_2
+Added Pin To Net: NetName=NetR1_1 Pin=S1-2
+Added Net: Name=NetR1_1
+Added Pin To Net: NetName=NetR3_1 Pin=S2-2
+Added Net: Name=NetR3_1
+Added Net: Name=NetR4A_2
+Added Pin To Net: NetName=NetR4B_2 Pin=S4-1
+Added Net: Name=NetR4B_2
+Added Pin To Net: NetName=NetS3_1 Pin=S3-1
+Added Pin To Net: NetName=NetS3_1 Pin=TB34-2
+Added Net: Name=NetS3_1
+Added Pin To Net: NetName=NetS6_1 Pin=S6-1
+Added Pin To Net: NetName=NetS6_1 Pin=TB12-2
+Added Net: Name=NetS6_1
+Added Member To Class: ClassName=TLine Member=Component C1 Cap
+Added Member To Class: ClassName=TLine Member=Component C2 Cap
+Added Member To Class: ClassName=TLine Member=Component C3 Cap
+Added Member To Class: ClassName=TLine Member=Component C4 Cap
+Added Member To Class: ClassName=TLine Member=Component IN1 Header 2X2
+Added Member To Class: ClassName=TLine Member=Component IN2 Header 2X2
+Added Member To Class: ClassName=TLine Member=Component L1 Inductor
+Added Member To Class: ClassName=TLine Member=Component L2 Inductor
+Added Member To Class: ClassName=TLine Member=Component L3 Inductor
+Added Member To Class: ClassName=TLine Member=Component L4 Inductor
+Added Member To Class: ClassName=TLine Member=Component R1 Res1
+Added Member To Class: ClassName=TLine Member=Component R2 Res3
+Added Member To Class: ClassName=TLine Member=Component R3 Res3
+Added Member To Class: ClassName=TLine Member=Component R4A Res3
+Added Member To Class: ClassName=TLine Member=Component R4B Res3
+Added Member To Class: ClassName=TLine Member=Component S1 SW-SPST
+Added Member To Class: ClassName=TLine Member=Component S2 SW-SPST
+Added Member To Class: ClassName=TLine Member=Component S3 SW-SPST
+Added Member To Class: ClassName=TLine Member=Component S4 SW-SPST
+Added Member To Class: ClassName=TLine Member=Component S5 SW-SPST
+Added Member To Class: ClassName=TLine Member=Component S6 SW-SPST
+Added Member To Class: ClassName=TLine Member=Component TB12 Header 2X2
+Added Member To Class: ClassName=TLine Member=Component TB34 Header 2X2
+Added Room: Name=TLine

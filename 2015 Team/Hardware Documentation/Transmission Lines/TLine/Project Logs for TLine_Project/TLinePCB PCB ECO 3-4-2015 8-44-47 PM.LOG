@@ -1,0 +1,9 @@
+Added Pin To Net: NetName=NetL2_2 Pin=R2-1
+Added Pin To Net: NetName=NetR2_2 Pin=R2-2
+Added Pin To Net: NetName=NetR3_1 Pin=R3-1
+Added Pin To Net: NetName=NetL3_1 Pin=R3-2
+Added Pin To Net: NetName=NetL4_2 Pin=R4A-1
+Added Pin To Net: NetName=NetR4A_2 Pin=R4A-2
+Added Pin To Net: NetName=NetR4A_2 Pin=R4B-1
+Added Pin To Net: NetName=NetR4B_2 Pin=R4B-2
+Added Room: Name=TLine

@@ -1,0 +1,11 @@
+Change Component DesignItemId : Designator=TB12 Old DesignItemId=Header 2X2 New DesignItemId=Header 2
+Change Component DesignItemId : Designator=TB34 Old DesignItemId=Header 2X2 New DesignItemId=Header 2
+Change Component Comment : Designator=TB12 Old Comment=Header 2X2 New Comment=Header 2
+Change Component Comment : Designator=TB34 Old Comment=Header 2X2 New Comment=Header 2
+Change Component Description : Designator=TB12 Old Description=Header, 2-Pin, Dual row New Description=Header, 2-Pin
+Change Component Description : Designator=TB34 Old Description=Header, 2-Pin, Dual row New Description=Header, 2-Pin
+Added Pin To Net: NetName=NetC3_2 Pin=SW3-1
+Added Pin To Net: NetName=NetC1_2 Pin=SW6-1
+Added Pin To Net: NetName=GND Pin=TB12-2
+Added Pin To Net: NetName=GND Pin=TB34-2
+Added Room: Name=TLine
