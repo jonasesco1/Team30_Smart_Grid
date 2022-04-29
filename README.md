@@ -1,4 +1,4 @@
-### Team30_Smart_Grid
+# Team30 Smart Grid
 
 ## The Team
 
