@@ -1,0 +1,970 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>SmartGrid_exported</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-04-29"><meta name="DC.source" content="SmartGrid_exported.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">classdef</span> SmartGrid_exported &lt; matlab.apps.AppBase
+
+    <span class="comment">% Properties that correspond to app components</span>
+    <span class="keyword">properties</span> (Access = public)
+        SMARTGRIDUIFigure          matlab.ui.Figure
+        TabGroup                   matlab.ui.container.TabGroup
+        SetupTab                   matlab.ui.container.Tab
+        VFT                        matlab.ui.control.UIAxes
+        IFT                        matlab.ui.control.UIAxes
+        Isig                       matlab.ui.control.UIAxes
+        Vsig                       matlab.ui.control.UIAxes
+        CollectionTimesecEditFieldLabel_3  matlab.ui.control.Label
+        DataTime_2                 matlab.ui.control.NumericEditField
+        RecordDAQ_2                matlab.ui.control.Button
+        ButtonGroup                matlab.ui.container.ButtonGroup
+        ConnectDAQ                 matlab.ui.control.Button
+        DAQLamp                    matlab.ui.control.Lamp
+        SMARTGRIDLabel             matlab.ui.control.Label
+        TEAM30Label                matlab.ui.control.Label
+        DataAnalysisTab            matlab.ui.container.Tab
+        VoltageDisplay             matlab.ui.control.UIAxes
+        CurrentDisplay             matlab.ui.control.UIAxes
+        UIAxes                     matlab.ui.control.UIAxes
+        RecordDAQ                  matlab.ui.control.Button
+        PhaserCalculation          matlab.ui.control.Button
+        PowerFactorEditFieldLabel  matlab.ui.control.Label
+        PowerFactor                matlab.ui.control.NumericEditField
+        PhasedegreesLabel          matlab.ui.control.Label
+        Phase                      matlab.ui.control.NumericEditField
+        RMSVoltageVEditFieldLabel  matlab.ui.control.Label
+        RMSVoltage                 matlab.ui.control.NumericEditField
+        RMSCurrentAEditFieldLabel  matlab.ui.control.Label
+        RMSCurrent                 matlab.ui.control.NumericEditField
+        CollectionTimesecEditFieldLabel_2  matlab.ui.control.Label
+        DataTime                   matlab.ui.control.NumericEditField
+        SaveDataButton             matlab.ui.control.Button
+    <span class="keyword">end</span>
+
+
+    <span class="keyword">properties</span> (Access = private)
+        DAQobj; <span class="comment">% object for DAQ connection</span>
+        daq_test; <span class="comment">% most recent 'daq test' data</span>
+        v_data;
+        i_data;
+        t_data;
+    <span class="keyword">end</span>
+
+
+    <span class="keyword">methods</span> (Access = private)
+
+        <span class="comment">% Button pushed function: ConnectDAQ</span>
+        <span class="keyword">function</span> ConnectDAQPushed(app, event)
+            app.DAQobj = daq(<span class="string">'ni'</span>);
+            addinput(app.DAQobj,<span class="string">'myDAQ2'</span>,<span class="string">'ai0'</span>,<span class="string">'Voltage'</span>); <span class="comment">% voltage signal from sensor</span>
+            addinput(app.DAQobj,<span class="string">'myDAQ2'</span>,<span class="string">'ai1'</span>,<span class="string">'Voltage'</span>); <span class="comment">% current signal from sensor</span>
+            chantable = app.DAQobj.Channels;
+            <span class="comment">% if the connection was successful, two channels should be open</span>
+            <span class="keyword">if</span> length(chantable) == 2 <span class="comment">% connected</span>
+                app.DAQLamp.Color = [0.39 0.83 0.07]; <span class="comment">% green</span>
+                app.ConnectDAQ.Enable = <span class="string">'off'</span>;
+            <span class="keyword">else</span> <span class="comment">% connection failed</span>
+                app.DAQLamp.Color = [0.85 0.33 0.10]; <span class="comment">% red</span>
+                delete(app.DAQobj); <span class="comment">% cancel</span>
+            <span class="keyword">end</span>
+            compass(app.UIAxes, 0, 0);
+        <span class="keyword">end</span>
+
+        <span class="comment">% Button pushed function: RecordDAQ</span>
+        <span class="keyword">function</span> RecordDAQPushed(app, event)
+            acq_length_sec = app.DataTime.Value; <span class="comment">% sets time length for data acquisition</span>
+            acq_length_ms = acq_length_sec*1000; <span class="comment">% converts seconds to milliseconds</span>
+            app.daq_test = read(app.DAQobj,seconds(acq_length_sec),<span class="string">'OutputFormat'</span>,<span class="string">'Matrix'</span>); <span class="comment">% reads data from myDAQ</span>
+
+            <span class="comment">% grab current and voltage, scale properly from sensor board</span>
+            app.i_data = (app.daq_test(:,1) - 1.2) * 10;
+            app.v_data = (app.daq_test(:,2) - 1.2) * 10;
+            i_avg = mean(app.i_data);
+            app.i_data = app.i_data - i_avg;
+
+            <span class="comment">% plots current and voltage with respect to time</span>
+            app.t_data = 0:(acq_length_ms-1);
+            plot(app.VoltageDisplay,app.t_data,app.v_data)
+            xlim(app.VoltageDisplay,[0 acq_length_ms])
+            plot(app.CurrentDisplay,app.t_data,app.i_data)
+            xlim(app.CurrentDisplay,[0 acq_length_ms])
+        <span class="keyword">end</span>
+
+        <span class="comment">% Button pushed function: PhaserCalculation</span>
+        <span class="keyword">function</span> PhaserCalculationPushed(app, event)
+<span class="comment">%        Use of phdiffmeasure provided by:</span>
+<span class="comment">%           Copyright (c) 2016, Hristo Zhivomirov</span>
+<span class="comment">%           All rights reserved.</span>
+<span class="comment">%</span>
+<span class="comment">%         Redistribution and use in source and binary forms, with or without</span>
+<span class="comment">%         modification, are permitted provided that the following conditions are met:</span>
+<span class="comment">%</span>
+<span class="comment">%         * Redistributions of source code must retain the above copyright notice, this</span>
+<span class="comment">%          list of conditions and the following disclaimer.</span>
+<span class="comment">%</span>
+<span class="comment">%         * Redistributions in binary form must reproduce the above copyright notice,</span>
+<span class="comment">%           this list of conditions and the following disclaimer in the documentation</span>
+<span class="comment">%          and/or other materials provided with the distribution</span>
+<span class="comment">%         * Neither the name of  nor the names of its contributors may be</span>
+<span class="comment">%           used to endorse or promote products derived from this</span>
+<span class="comment">%           software without specific prior written permission.</span>
+<span class="comment">%         THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"</span>
+<span class="comment">%         AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
+<span class="comment">%         IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span>
+<span class="comment">%         DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE</span>
+<span class="comment">%         FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</span>
+<span class="comment">%         DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR</span>
+<span class="comment">%         SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="comment">%         CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,</span>
+<span class="comment">%         OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="comment">%         OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+
+            phase = rad2deg(phdiffmeasure(app.v_data, app.i_data)); <span class="comment">% measures the phase difference in degrees</span>
+           <span class="keyword">if</span> (phase &gt; 180)
+            phase = phase - 360; <span class="comment">% adjusts the phase difference by 360 to get lagging/leading current</span>
+           <span class="keyword">end</span>
+           power_factor = cos(deg2rad(phase)); <span class="comment">% calculates power factor</span>
+           app.PowerFactor.Value = power_factor;
+           app.Phase.Value = phase;
+           v_max = max(app.v_data);
+           i_max = max(app.i_data);
+           v_rms = v_max / sqrt(2); <span class="comment">% calculates the rms voltage from the max voltage</span>
+           i_rms = i_max / sqrt(2); <span class="comment">% calculates the rms current from the max current</span>
+           app.RMSCurrent.Value = i_rms;
+           app.RMSVoltage.Value = v_rms;
+
+           <span class="comment">% sets the axis for the phase plot</span>
+           set(app.UIAxes, <span class="string">'XLim'</span>, [-20 20]);
+           set(app.UIAxes, <span class="string">'YLim'</span>, [-20 20]);
+
+           grid(app.UIAxes,<span class="string">'on'</span>);
+
+           <span class="comment">% finds the x and y coordinates for the current phasor</span>
+           x = i_rms * cos(deg2rad(phase));
+           y = i_rms * sin(deg2rad(phase));
+
+           <span class="comment">%establishes the compass graph to get a readable phasor diagram</span>
+           c = compass(app.UIAxes, [v_rms x*15], [0 y*15]);
+           c1 = c(1);
+           c1.Color = <span class="string">'r'</span>;
+           legend(app.UIAxes, [<span class="string">"Voltage"</span>, <span class="string">"Current"</span>]);
+        <span class="keyword">end</span>
+
+        <span class="comment">% Button pushed function: SaveDataButton</span>
+        <span class="keyword">function</span> SaveDataButtonPushed(app, event)
+            <span class="comment">% Save most recent DAQ data</span>
+            raw_data = app.daq_test; <span class="comment">% data directly from DAQ</span>
+            real_data = [app.v_data,app.i_data]; <span class="comment">% adjusted/scaled data</span>
+            time_ms = app.t_data; <span class="comment">% time data was collected over</span>
+            [f,p] = uiputfile(<span class="string">'*.mat'</span>);
+            <span class="keyword">if</span> f~=0
+                save([p f],<span class="string">'raw_data'</span>,<span class="string">'real_data'</span>,<span class="string">'time_ms'</span>);
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+
+        <span class="comment">% Close request function: SMARTGRIDUIFigure</span>
+        <span class="keyword">function</span> SMARTGRIDUIFigureCloseRequest(app, event)
+            <span class="keyword">if</span> strcmp(app.ConnectDAQ.Enable,<span class="string">'off'</span>)
+                delete(app.DAQobj)
+            <span class="keyword">end</span>
+            delete(app)
+        <span class="keyword">end</span>
+
+        <span class="comment">% Button pushed function: RecordDAQ_2</span>
+        <span class="keyword">function</span> RecordDAQ_2ButtonPushed(app, event)
+            acq_length_sec = app.DataTime_2.Value; <span class="comment">% sets time length for data acquisition</span>
+            acq_length_ms = acq_length_sec*1000; <span class="comment">% converts seconds to milliseconds</span>
+            testdata = read(app.DAQobj,seconds(acq_length_sec),<span class="string">'OutputFormat'</span>,<span class="string">'Matrix'</span>); <span class="comment">% reads data from myDAQ</span>
+
+            <span class="comment">% grab current and voltage, scale properly from sensor board</span>
+            i_dat = (testdata(:,1) - 1.2) * 10;
+            v_dat = (testdata(:,2) - 1.2) * 10;
+            i_avg = mean(i_dat);
+            i_dat = i_dat - i_avg;
+
+            <span class="comment">% plots current and voltage with respect to time</span>
+            t_dat = 0:(acq_length_ms-1);
+            plot(app.Vsig,t_dat,v_dat)
+            xlim(app.Vsig,[0 acq_length_ms])
+            plot(app.Isig,t_dat,i_dat)
+            xlim(app.Isig,[0 acq_length_ms])
+
+            <span class="comment">% computes Fourier Transform to get Frequency Data</span>
+            time = t_dat * .001;
+            sample_freq = 1/time(2);
+            sigA = v_dat;
+            sigB = i_dat;
+
+            numa = length(sigA); <span class="comment">% finds the number of data points</span>
+            Ya = fft(sigA); <span class="comment">% evaluates the fourier transform on the data</span>
+            P2a = abs(Ya / numa);
+            P1a = P2a(1:numa/2 + 0.5);
+            P1a(2:end-1) = 2 * P1a(2:end - 1);
+            fa = sample_freq * (0:(numa / 2)) / numa;
+            [~, Ia] = max(P1a);
+            freqa = fa(Ia); <span class="comment">% finds and saves dominant frequency to variable</span>
+
+            numb = length(sigB); <span class="comment">% finds the number of data points</span>
+            Yb = fft(sigB); <span class="comment">% evaluates the fourier transform on the data</span>
+            P2b = abs(Yb / numb);
+            P1b = P2b(1:numb/2 + 0.5);
+            P1b(2:end-1) = 2 * P1b(2:end - 1);
+            fb = sample_freq * (0:(numb / 2)) / numb;
+            [~, Ib] = max(P1b);
+            freq = fb(Ib);
+
+            len = length(t_dat);
+            disp(size(fa))
+            disp(size(P1a))
+            stem(app.VFT,fa(1, 1:length(P1a)),P1a)
+            xlim(app.VFT,[0 .4*len])
+            text(app.VFT,fa(Ia), P1a(Ia), <span class="string">"    Frequency: "</span> + freqa + <span class="string">" Hz"</span>)
+            stem(app.IFT,fb(1, 1:length(P1b)),P1b)
+            xlim(app.IFT,[0 .4*len])
+            text(app.IFT,fb(Ib), P1b(Ib), <span class="string">"    Frequency: "</span> + freq + <span class="string">" Hz"</span>)
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    <span class="comment">% App initialization and construction</span>
+    <span class="keyword">methods</span> (Access = private)
+
+        <span class="comment">% Create UIFigure and components</span>
+        <span class="keyword">function</span> createComponents(app)
+
+            <span class="comment">% Create SMARTGRIDUIFigure</span>
+            app.SMARTGRIDUIFigure = uifigure;
+            app.SMARTGRIDUIFigure.Position = [100 100 761 507];
+            app.SMARTGRIDUIFigure.Name = <span class="string">'SMARTGRID'</span>;
+            app.SMARTGRIDUIFigure.CloseRequestFcn = createCallbackFcn(app, @SMARTGRIDUIFigureCloseRequest, true);
+
+            <span class="comment">% Create TabGroup</span>
+            app.TabGroup = uitabgroup(app.SMARTGRIDUIFigure);
+            app.TabGroup.Position = [1 1 761 507];
+
+            <span class="comment">% Create SetupTab</span>
+            app.SetupTab = uitab(app.TabGroup);
+            app.SetupTab.Title = <span class="string">'Setup'</span>;
+            app.SetupTab.BackgroundColor = [0.9294 0.6902 0.1294];
+
+            <span class="comment">% Create VFT</span>
+            app.VFT = uiaxes(app.SetupTab);
+            title(app.VFT, <span class="string">'Voltage Fourier Transform'</span>)
+            xlabel(app.VFT, <span class="string">'Frequency [Hz]'</span>)
+            ylabel(app.VFT, <span class="string">'Amplitude [a.u.]'</span>)
+            app.VFT.PlotBoxAspectRatio = [2.83333333333333 1 1];
+            app.VFT.Position = [12 5 359 193];
+
+            <span class="comment">% Create IFT</span>
+            app.IFT = uiaxes(app.SetupTab);
+            title(app.IFT, <span class="string">'Current Fourier Transform'</span>)
+            xlabel(app.IFT, <span class="string">'Frequency [Hz]'</span>)
+            ylabel(app.IFT, <span class="string">'Amplitude [a.u.]'</span>)
+            app.IFT.PlotBoxAspectRatio = [2.83333333333333 1 1];
+            app.IFT.Position = [390 5 359 193];
+
+            <span class="comment">% Create Isig</span>
+            app.Isig = uiaxes(app.SetupTab);
+            title(app.Isig, <span class="string">'Current'</span>)
+            xlabel(app.Isig, <span class="string">'Time [ms]'</span>)
+            ylabel(app.Isig, <span class="string">'Signal [A]'</span>)
+            app.Isig.PlotBoxAspectRatio = [2.83333333333333 1 1];
+            app.Isig.Position = [390 210 359 208];
+
+            <span class="comment">% Create Vsig</span>
+            app.Vsig = uiaxes(app.SetupTab);
+            title(app.Vsig, <span class="string">'Voltage'</span>)
+            xlabel(app.Vsig, <span class="string">'Time [ms]'</span>)
+            ylabel(app.Vsig, <span class="string">'Signal [V]'</span>)
+            app.Vsig.PlotBoxAspectRatio = [2.83333333333333 1 1];
+            app.Vsig.Position = [12 210 359 208];
+
+            <span class="comment">% Create CollectionTimesecEditFieldLabel_3</span>
+            app.CollectionTimesecEditFieldLabel_3 = uilabel(app.SetupTab);
+            app.CollectionTimesecEditFieldLabel_3.HorizontalAlignment = <span class="string">'right'</span>;
+            app.CollectionTimesecEditFieldLabel_3.Position = [624 449 118 22];
+            app.CollectionTimesecEditFieldLabel_3.Text = <span class="string">'Collection Time (sec)'</span>;
+
+            <span class="comment">% Create DataTime_2</span>
+            app.DataTime_2 = uieditfield(app.SetupTab, <span class="string">'numeric'</span>);
+            app.DataTime_2.Position = [652 427 62 22];
+            app.DataTime_2.Value = 0.2;
+
+            <span class="comment">% Create RecordDAQ_2</span>
+            app.RecordDAQ_2 = uibutton(app.SetupTab, <span class="string">'push'</span>);
+            app.RecordDAQ_2.ButtonPushedFcn = createCallbackFcn(app, @RecordDAQ_2ButtonPushed, true);
+            app.RecordDAQ_2.BackgroundColor = [0.302 0.7451 0.9333];
+            app.RecordDAQ_2.Position = [513 429 100 41];
+            app.RecordDAQ_2.Text = <span class="string">'Record DAQ'</span>;
+
+            <span class="comment">% Create ButtonGroup</span>
+            app.ButtonGroup = uibuttongroup(app.SetupTab);
+            app.ButtonGroup.BackgroundColor = [0 0 0];
+            app.ButtonGroup.Position = [63 424 156 51];
+
+            <span class="comment">% Create ConnectDAQ</span>
+            app.ConnectDAQ = uibutton(app.ButtonGroup, <span class="string">'push'</span>);
+            app.ConnectDAQ.ButtonPushedFcn = createCallbackFcn(app, @ConnectDAQPushed, true);
+            app.ConnectDAQ.Position = [9 11 104 30];
+            app.ConnectDAQ.Text = <span class="string">'Connect DAQ'</span>;
+
+            <span class="comment">% Create DAQLamp</span>
+            app.DAQLamp = uilamp(app.ButtonGroup);
+            app.DAQLamp.Position = [122 16 20 20];
+            app.DAQLamp.Color = [0.502 0.502 0.502];
+
+            <span class="comment">% Create SMARTGRIDLabel</span>
+            app.SMARTGRIDLabel = uilabel(app.SetupTab);
+            app.SMARTGRIDLabel.HorizontalAlignment = <span class="string">'center'</span>;
+            app.SMARTGRIDLabel.FontSize = 24;
+            app.SMARTGRIDLabel.FontWeight = <span class="string">'bold'</span>;
+            app.SMARTGRIDLabel.Position = [302 447 158 31];
+            app.SMARTGRIDLabel.Text = <span class="string">'SMART GRID'</span>;
+
+            <span class="comment">% Create TEAM30Label</span>
+            app.TEAM30Label = uilabel(app.SetupTab);
+            app.TEAM30Label.HorizontalAlignment = <span class="string">'center'</span>;
+            app.TEAM30Label.FontSize = 20;
+            app.TEAM30Label.Position = [337 425 87 26];
+            app.TEAM30Label.Text = <span class="string">'TEAM 30'</span>;
+
+            <span class="comment">% Create DataAnalysisTab</span>
+            app.DataAnalysisTab = uitab(app.TabGroup);
+            app.DataAnalysisTab.Title = <span class="string">'Data Analysis'</span>;
+            app.DataAnalysisTab.BackgroundColor = [0.4667 0.6745 0.1882];
+
+            <span class="comment">% Create VoltageDisplay</span>
+            app.VoltageDisplay = uiaxes(app.DataAnalysisTab);
+            title(app.VoltageDisplay, <span class="string">'Voltage'</span>)
+            xlabel(app.VoltageDisplay, <span class="string">'Time [ms]'</span>)
+            ylabel(app.VoltageDisplay, <span class="string">'Signal [V]'</span>)
+            app.VoltageDisplay.Position = [18 289 287 183];
+
+            <span class="comment">% Create CurrentDisplay</span>
+            app.CurrentDisplay = uiaxes(app.DataAnalysisTab);
+            title(app.CurrentDisplay, <span class="string">'Current'</span>)
+            xlabel(app.CurrentDisplay, <span class="string">'Time [ms]'</span>)
+            ylabel(app.CurrentDisplay, <span class="string">'Signal [A]'</span>)
+            app.CurrentDisplay.Position = [18 16 287 183];
+
+            <span class="comment">% Create UIAxes</span>
+            app.UIAxes = uiaxes(app.DataAnalysisTab);
+            title(app.UIAxes, <span class="string">'Phase Diagram'</span>)
+            xlabel(app.UIAxes, <span class="string">''</span>)
+            ylabel(app.UIAxes, <span class="string">''</span>)
+            zlabel(app.UIAxes, <span class="string">'Z'</span>)
+            app.UIAxes.Position = [304 126 452 357];
+
+            <span class="comment">% Create RecordDAQ</span>
+            app.RecordDAQ = uibutton(app.DataAnalysisTab, <span class="string">'push'</span>);
+            app.RecordDAQ.ButtonPushedFcn = createCallbackFcn(app, @RecordDAQPushed, true);
+            app.RecordDAQ.BackgroundColor = [0.302 0.7451 0.9333];
+            app.RecordDAQ.Position = [125 238 100 41];
+            app.RecordDAQ.Text = <span class="string">'Record DAQ'</span>;
+
+            <span class="comment">% Create PhaserCalculation</span>
+            app.PhaserCalculation = uibutton(app.DataAnalysisTab, <span class="string">'push'</span>);
+            app.PhaserCalculation.ButtonPushedFcn = createCallbackFcn(app, @PhaserCalculationPushed, true);
+            app.PhaserCalculation.BackgroundColor = [1 1 0.0667];
+            app.PhaserCalculation.Position = [486 15 116 37];
+            app.PhaserCalculation.Text = <span class="string">'Phaser Calculation'</span>;
+
+            <span class="comment">% Create PowerFactorEditFieldLabel</span>
+            app.PowerFactorEditFieldLabel = uilabel(app.DataAnalysisTab);
+            app.PowerFactorEditFieldLabel.HorizontalAlignment = <span class="string">'right'</span>;
+            app.PowerFactorEditFieldLabel.Position = [328 62 77 22];
+            app.PowerFactorEditFieldLabel.Text = <span class="string">'Power Factor'</span>;
+
+            <span class="comment">% Create PowerFactor</span>
+            app.PowerFactor = uieditfield(app.DataAnalysisTab, <span class="string">'numeric'</span>);
+            app.PowerFactor.Position = [420 62 100 22];
+
+            <span class="comment">% Create PhasedegreesLabel</span>
+            app.PhasedegreesLabel = uilabel(app.DataAnalysisTab);
+            app.PhasedegreesLabel.HorizontalAlignment = <span class="string">'right'</span>;
+            app.PhasedegreesLabel.Position = [311 97 94 22];
+            app.PhasedegreesLabel.Text = <span class="string">'Phase (degrees)'</span>;
+
+            <span class="comment">% Create Phase</span>
+            app.Phase = uieditfield(app.DataAnalysisTab, <span class="string">'numeric'</span>);
+            app.Phase.Position = [420 97 100 22];
+
+            <span class="comment">% Create RMSVoltageVEditFieldLabel</span>
+            app.RMSVoltageVEditFieldLabel = uilabel(app.DataAnalysisTab);
+            app.RMSVoltageVEditFieldLabel.HorizontalAlignment = <span class="string">'right'</span>;
+            app.RMSVoltageVEditFieldLabel.Position = [529 62 95 22];
+            app.RMSVoltageVEditFieldLabel.Text = <span class="string">'RMS Voltage (V)'</span>;
+
+            <span class="comment">% Create RMSVoltage</span>
+            app.RMSVoltage = uieditfield(app.DataAnalysisTab, <span class="string">'numeric'</span>);
+            app.RMSVoltage.Position = [639 62 100 22];
+
+            <span class="comment">% Create RMSCurrentAEditFieldLabel</span>
+            app.RMSCurrentAEditFieldLabel = uilabel(app.DataAnalysisTab);
+            app.RMSCurrentAEditFieldLabel.HorizontalAlignment = <span class="string">'right'</span>;
+            app.RMSCurrentAEditFieldLabel.Position = [529 97 95 22];
+            app.RMSCurrentAEditFieldLabel.Text = <span class="string">'RMS Current (A)'</span>;
+
+            <span class="comment">% Create RMSCurrent</span>
+            app.RMSCurrent = uieditfield(app.DataAnalysisTab, <span class="string">'numeric'</span>);
+            app.RMSCurrent.Position = [639 97 100 22];
+
+            <span class="comment">% Create CollectionTimesecEditFieldLabel_2</span>
+            app.CollectionTimesecEditFieldLabel_2 = uilabel(app.DataAnalysisTab);
+            app.CollectionTimesecEditFieldLabel_2.HorizontalAlignment = <span class="string">'right'</span>;
+            app.CollectionTimesecEditFieldLabel_2.Position = [77 207 118 22];
+            app.CollectionTimesecEditFieldLabel_2.Text = <span class="string">'Collection Time (sec)'</span>;
+
+            <span class="comment">% Create DataTime</span>
+            app.DataTime = uieditfield(app.DataAnalysisTab, <span class="string">'numeric'</span>);
+            app.DataTime.Position = [210 207 62 22];
+            app.DataTime.Value = 0.5;
+
+            <span class="comment">% Create SaveDataButton</span>
+            app.SaveDataButton = uibutton(app.DataAnalysisTab, <span class="string">'push'</span>);
+            app.SaveDataButton.ButtonPushedFcn = createCallbackFcn(app, @SaveDataButtonPushed, true);
+            app.SaveDataButton.BackgroundColor = [0.502 0.502 0.502];
+            app.SaveDataButton.Position = [39 247 74 23];
+            app.SaveDataButton.Text = <span class="string">'Save Data'</span>;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    <span class="keyword">methods</span> (Access = public)
+
+        <span class="comment">% Construct app</span>
+        <span class="keyword">function</span> app = SmartGrid_exported
+
+            <span class="comment">% Create and configure components</span>
+            createComponents(app)
+
+            <span class="comment">% Register the app with App Designer</span>
+            registerApp(app, app.SMARTGRIDUIFigure)
+
+            <span class="keyword">if</span> nargout == 0
+                clear <span class="string">app</span>
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+
+        <span class="comment">% Code that executes before app deletion</span>
+        <span class="keyword">function</span> delete(app)
+
+            <span class="comment">% Delete UIFigure when app is deleted</span>
+            delete(app.SMARTGRIDUIFigure)
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+classdef SmartGrid_exported < matlab.apps.AppBase
+
+    % Properties that correspond to app components
+    properties (Access = public)
+        SMARTGRIDUIFigure          matlab.ui.Figure
+        TabGroup                   matlab.ui.container.TabGroup
+        SetupTab                   matlab.ui.container.Tab
+        VFT                        matlab.ui.control.UIAxes
+        IFT                        matlab.ui.control.UIAxes
+        Isig                       matlab.ui.control.UIAxes
+        Vsig                       matlab.ui.control.UIAxes
+        CollectionTimesecEditFieldLabel_3  matlab.ui.control.Label
+        DataTime_2                 matlab.ui.control.NumericEditField
+        RecordDAQ_2                matlab.ui.control.Button
+        ButtonGroup                matlab.ui.container.ButtonGroup
+        ConnectDAQ                 matlab.ui.control.Button
+        DAQLamp                    matlab.ui.control.Lamp
+        SMARTGRIDLabel             matlab.ui.control.Label
+        TEAM30Label                matlab.ui.control.Label
+        DataAnalysisTab            matlab.ui.container.Tab
+        VoltageDisplay             matlab.ui.control.UIAxes
+        CurrentDisplay             matlab.ui.control.UIAxes
+        UIAxes                     matlab.ui.control.UIAxes
+        RecordDAQ                  matlab.ui.control.Button
+        PhaserCalculation          matlab.ui.control.Button
+        PowerFactorEditFieldLabel  matlab.ui.control.Label
+        PowerFactor                matlab.ui.control.NumericEditField
+        PhasedegreesLabel          matlab.ui.control.Label
+        Phase                      matlab.ui.control.NumericEditField
+        RMSVoltageVEditFieldLabel  matlab.ui.control.Label
+        RMSVoltage                 matlab.ui.control.NumericEditField
+        RMSCurrentAEditFieldLabel  matlab.ui.control.Label
+        RMSCurrent                 matlab.ui.control.NumericEditField
+        CollectionTimesecEditFieldLabel_2  matlab.ui.control.Label
+        DataTime                   matlab.ui.control.NumericEditField
+        SaveDataButton             matlab.ui.control.Button
+    end
+
+    
+    properties (Access = private)
+        DAQobj; % object for DAQ connection
+        daq_test; % most recent 'daq test' data
+        v_data;
+        i_data;
+        t_data;
+    end
+
+
+    methods (Access = private)
+
+        % Button pushed function: ConnectDAQ
+        function ConnectDAQPushed(app, event)
+            app.DAQobj = daq('ni');
+            addinput(app.DAQobj,'myDAQ2','ai0','Voltage'); % voltage signal from sensor
+            addinput(app.DAQobj,'myDAQ2','ai1','Voltage'); % current signal from sensor
+            chantable = app.DAQobj.Channels;
+            % if the connection was successful, two channels should be open
+            if length(chantable) == 2 % connected
+                app.DAQLamp.Color = [0.39 0.83 0.07]; % green
+                app.ConnectDAQ.Enable = 'off';
+            else % connection failed
+                app.DAQLamp.Color = [0.85 0.33 0.10]; % red
+                delete(app.DAQobj); % cancel
+            end
+            compass(app.UIAxes, 0, 0);
+        end
+
+        % Button pushed function: RecordDAQ
+        function RecordDAQPushed(app, event)
+            acq_length_sec = app.DataTime.Value; % sets time length for data acquisition
+            acq_length_ms = acq_length_sec*1000; % converts seconds to milliseconds
+            app.daq_test = read(app.DAQobj,seconds(acq_length_sec),'OutputFormat','Matrix'); % reads data from myDAQ
+
+            % grab current and voltage, scale properly from sensor board
+            app.i_data = (app.daq_test(:,1) - 1.2) * 10; 
+            app.v_data = (app.daq_test(:,2) - 1.2) * 10;
+            i_avg = mean(app.i_data);
+            app.i_data = app.i_data - i_avg; 
+
+            % plots current and voltage with respect to time
+            app.t_data = 0:(acq_length_ms-1);
+            plot(app.VoltageDisplay,app.t_data,app.v_data)
+            xlim(app.VoltageDisplay,[0 acq_length_ms])
+            plot(app.CurrentDisplay,app.t_data,app.i_data)
+            xlim(app.CurrentDisplay,[0 acq_length_ms])
+        end
+
+        % Button pushed function: PhaserCalculation
+        function PhaserCalculationPushed(app, event)
+%        Use of phdiffmeasure provided by:
+%           Copyright (c) 2016, Hristo Zhivomirov
+%           All rights reserved.
+% 
+%         Redistribution and use in source and binary forms, with or without
+%         modification, are permitted provided that the following conditions are met:
+% 
+%         * Redistributions of source code must retain the above copyright notice, this
+%          list of conditions and the following disclaimer.
+% 
+%         * Redistributions in binary form must reproduce the above copyright notice,
+%           this list of conditions and the following disclaimer in the documentation
+%          and/or other materials provided with the distribution
+%         * Neither the name of  nor the names of its contributors may be 
+%           used to endorse or promote products derived from this
+%           software without specific prior written permission.
+%         THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+%         AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+%         IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+%         DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+%         FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+%         DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+%         SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+%         CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+%         OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+%         OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+            phase = rad2deg(phdiffmeasure(app.v_data, app.i_data)); % measures the phase difference in degrees
+           if (phase > 180)
+            phase = phase - 360; % adjusts the phase difference by 360 to get lagging/leading current
+           end
+           power_factor = cos(deg2rad(phase)); % calculates power factor
+           app.PowerFactor.Value = power_factor;
+           app.Phase.Value = phase;
+           v_max = max(app.v_data); 
+           i_max = max(app.i_data);
+           v_rms = v_max / sqrt(2); % calculates the rms voltage from the max voltage
+           i_rms = i_max / sqrt(2); % calculates the rms current from the max current
+           app.RMSCurrent.Value = i_rms;
+           app.RMSVoltage.Value = v_rms;
+
+           % sets the axis for the phase plot
+           set(app.UIAxes, 'XLim', [-20 20]);
+           set(app.UIAxes, 'YLim', [-20 20]);
+
+           grid(app.UIAxes,'on');
+
+           % finds the x and y coordinates for the current phasor
+           x = i_rms * cos(deg2rad(phase));
+           y = i_rms * sin(deg2rad(phase));
+
+           %establishes the compass graph to get a readable phasor diagram
+           c = compass(app.UIAxes, [v_rms x*15], [0 y*15]);
+           c1 = c(1);
+           c1.Color = 'r';
+           legend(app.UIAxes, ["Voltage", "Current"]);
+        end
+
+        % Button pushed function: SaveDataButton
+        function SaveDataButtonPushed(app, event)
+            % Save most recent DAQ data
+            raw_data = app.daq_test; % data directly from DAQ
+            real_data = [app.v_data,app.i_data]; % adjusted/scaled data
+            time_ms = app.t_data; % time data was collected over
+            [f,p] = uiputfile('*.mat');
+            if f~=0
+                save([p f],'raw_data','real_data','time_ms');
+            end
+        end
+
+        % Close request function: SMARTGRIDUIFigure
+        function SMARTGRIDUIFigureCloseRequest(app, event)
+            if strcmp(app.ConnectDAQ.Enable,'off')
+                delete(app.DAQobj)
+            end
+            delete(app)
+        end
+
+        % Button pushed function: RecordDAQ_2
+        function RecordDAQ_2ButtonPushed(app, event)
+            acq_length_sec = app.DataTime_2.Value; % sets time length for data acquisition
+            acq_length_ms = acq_length_sec*1000; % converts seconds to milliseconds
+            testdata = read(app.DAQobj,seconds(acq_length_sec),'OutputFormat','Matrix'); % reads data from myDAQ
+            
+            % grab current and voltage, scale properly from sensor board
+            i_dat = (testdata(:,1) - 1.2) * 10;
+            v_dat = (testdata(:,2) - 1.2) * 10;
+            i_avg = mean(i_dat);
+            i_dat = i_dat - i_avg;
+
+            % plots current and voltage with respect to time
+            t_dat = 0:(acq_length_ms-1);
+            plot(app.Vsig,t_dat,v_dat)
+            xlim(app.Vsig,[0 acq_length_ms])
+            plot(app.Isig,t_dat,i_dat)
+            xlim(app.Isig,[0 acq_length_ms])
+            
+            % computes Fourier Transform to get Frequency Data
+            time = t_dat * .001;
+            sample_freq = 1/time(2);
+            sigA = v_dat;
+            sigB = i_dat;
+
+            numa = length(sigA); % finds the number of data points
+            Ya = fft(sigA); % evaluates the fourier transform on the data
+            P2a = abs(Ya / numa);
+            P1a = P2a(1:numa/2 + 0.5);
+            P1a(2:end-1) = 2 * P1a(2:end - 1);
+            fa = sample_freq * (0:(numa / 2)) / numa;
+            [~, Ia] = max(P1a);
+            freqa = fa(Ia); % finds and saves dominant frequency to variable
+
+            numb = length(sigB); % finds the number of data points
+            Yb = fft(sigB); % evaluates the fourier transform on the data
+            P2b = abs(Yb / numb);
+            P1b = P2b(1:numb/2 + 0.5);
+            P1b(2:end-1) = 2 * P1b(2:end - 1);
+            fb = sample_freq * (0:(numb / 2)) / numb;
+            [~, Ib] = max(P1b);
+            freq = fb(Ib);
+            
+            len = length(t_dat);
+            disp(size(fa))
+            disp(size(P1a))
+            stem(app.VFT,fa(1, 1:length(P1a)),P1a)
+            xlim(app.VFT,[0 .4*len])
+            text(app.VFT,fa(Ia), P1a(Ia), "    Frequency: " + freqa + " Hz")
+            stem(app.IFT,fb(1, 1:length(P1b)),P1b)
+            xlim(app.IFT,[0 .4*len])
+            text(app.IFT,fb(Ib), P1b(Ib), "    Frequency: " + freq + " Hz")
+        end
+    end
+
+    % App initialization and construction
+    methods (Access = private)
+
+        % Create UIFigure and components
+        function createComponents(app)
+
+            % Create SMARTGRIDUIFigure
+            app.SMARTGRIDUIFigure = uifigure;
+            app.SMARTGRIDUIFigure.Position = [100 100 761 507];
+            app.SMARTGRIDUIFigure.Name = 'SMARTGRID';
+            app.SMARTGRIDUIFigure.CloseRequestFcn = createCallbackFcn(app, @SMARTGRIDUIFigureCloseRequest, true);
+
+            % Create TabGroup
+            app.TabGroup = uitabgroup(app.SMARTGRIDUIFigure);
+            app.TabGroup.Position = [1 1 761 507];
+
+            % Create SetupTab
+            app.SetupTab = uitab(app.TabGroup);
+            app.SetupTab.Title = 'Setup';
+            app.SetupTab.BackgroundColor = [0.9294 0.6902 0.1294];
+
+            % Create VFT
+            app.VFT = uiaxes(app.SetupTab);
+            title(app.VFT, 'Voltage Fourier Transform')
+            xlabel(app.VFT, 'Frequency [Hz]')
+            ylabel(app.VFT, 'Amplitude [a.u.]')
+            app.VFT.PlotBoxAspectRatio = [2.83333333333333 1 1];
+            app.VFT.Position = [12 5 359 193];
+
+            % Create IFT
+            app.IFT = uiaxes(app.SetupTab);
+            title(app.IFT, 'Current Fourier Transform')
+            xlabel(app.IFT, 'Frequency [Hz]')
+            ylabel(app.IFT, 'Amplitude [a.u.]')
+            app.IFT.PlotBoxAspectRatio = [2.83333333333333 1 1];
+            app.IFT.Position = [390 5 359 193];
+
+            % Create Isig
+            app.Isig = uiaxes(app.SetupTab);
+            title(app.Isig, 'Current')
+            xlabel(app.Isig, 'Time [ms]')
+            ylabel(app.Isig, 'Signal [A]')
+            app.Isig.PlotBoxAspectRatio = [2.83333333333333 1 1];
+            app.Isig.Position = [390 210 359 208];
+
+            % Create Vsig
+            app.Vsig = uiaxes(app.SetupTab);
+            title(app.Vsig, 'Voltage')
+            xlabel(app.Vsig, 'Time [ms]')
+            ylabel(app.Vsig, 'Signal [V]')
+            app.Vsig.PlotBoxAspectRatio = [2.83333333333333 1 1];
+            app.Vsig.Position = [12 210 359 208];
+
+            % Create CollectionTimesecEditFieldLabel_3
+            app.CollectionTimesecEditFieldLabel_3 = uilabel(app.SetupTab);
+            app.CollectionTimesecEditFieldLabel_3.HorizontalAlignment = 'right';
+            app.CollectionTimesecEditFieldLabel_3.Position = [624 449 118 22];
+            app.CollectionTimesecEditFieldLabel_3.Text = 'Collection Time (sec)';
+
+            % Create DataTime_2
+            app.DataTime_2 = uieditfield(app.SetupTab, 'numeric');
+            app.DataTime_2.Position = [652 427 62 22];
+            app.DataTime_2.Value = 0.2;
+
+            % Create RecordDAQ_2
+            app.RecordDAQ_2 = uibutton(app.SetupTab, 'push');
+            app.RecordDAQ_2.ButtonPushedFcn = createCallbackFcn(app, @RecordDAQ_2ButtonPushed, true);
+            app.RecordDAQ_2.BackgroundColor = [0.302 0.7451 0.9333];
+            app.RecordDAQ_2.Position = [513 429 100 41];
+            app.RecordDAQ_2.Text = 'Record DAQ';
+
+            % Create ButtonGroup
+            app.ButtonGroup = uibuttongroup(app.SetupTab);
+            app.ButtonGroup.BackgroundColor = [0 0 0];
+            app.ButtonGroup.Position = [63 424 156 51];
+
+            % Create ConnectDAQ
+            app.ConnectDAQ = uibutton(app.ButtonGroup, 'push');
+            app.ConnectDAQ.ButtonPushedFcn = createCallbackFcn(app, @ConnectDAQPushed, true);
+            app.ConnectDAQ.Position = [9 11 104 30];
+            app.ConnectDAQ.Text = 'Connect DAQ';
+
+            % Create DAQLamp
+            app.DAQLamp = uilamp(app.ButtonGroup);
+            app.DAQLamp.Position = [122 16 20 20];
+            app.DAQLamp.Color = [0.502 0.502 0.502];
+
+            % Create SMARTGRIDLabel
+            app.SMARTGRIDLabel = uilabel(app.SetupTab);
+            app.SMARTGRIDLabel.HorizontalAlignment = 'center';
+            app.SMARTGRIDLabel.FontSize = 24;
+            app.SMARTGRIDLabel.FontWeight = 'bold';
+            app.SMARTGRIDLabel.Position = [302 447 158 31];
+            app.SMARTGRIDLabel.Text = 'SMART GRID';
+
+            % Create TEAM30Label
+            app.TEAM30Label = uilabel(app.SetupTab);
+            app.TEAM30Label.HorizontalAlignment = 'center';
+            app.TEAM30Label.FontSize = 20;
+            app.TEAM30Label.Position = [337 425 87 26];
+            app.TEAM30Label.Text = 'TEAM 30';
+
+            % Create DataAnalysisTab
+            app.DataAnalysisTab = uitab(app.TabGroup);
+            app.DataAnalysisTab.Title = 'Data Analysis';
+            app.DataAnalysisTab.BackgroundColor = [0.4667 0.6745 0.1882];
+
+            % Create VoltageDisplay
+            app.VoltageDisplay = uiaxes(app.DataAnalysisTab);
+            title(app.VoltageDisplay, 'Voltage')
+            xlabel(app.VoltageDisplay, 'Time [ms]')
+            ylabel(app.VoltageDisplay, 'Signal [V]')
+            app.VoltageDisplay.Position = [18 289 287 183];
+
+            % Create CurrentDisplay
+            app.CurrentDisplay = uiaxes(app.DataAnalysisTab);
+            title(app.CurrentDisplay, 'Current')
+            xlabel(app.CurrentDisplay, 'Time [ms]')
+            ylabel(app.CurrentDisplay, 'Signal [A]')
+            app.CurrentDisplay.Position = [18 16 287 183];
+
+            % Create UIAxes
+            app.UIAxes = uiaxes(app.DataAnalysisTab);
+            title(app.UIAxes, 'Phase Diagram')
+            xlabel(app.UIAxes, '')
+            ylabel(app.UIAxes, '')
+            zlabel(app.UIAxes, 'Z')
+            app.UIAxes.Position = [304 126 452 357];
+
+            % Create RecordDAQ
+            app.RecordDAQ = uibutton(app.DataAnalysisTab, 'push');
+            app.RecordDAQ.ButtonPushedFcn = createCallbackFcn(app, @RecordDAQPushed, true);
+            app.RecordDAQ.BackgroundColor = [0.302 0.7451 0.9333];
+            app.RecordDAQ.Position = [125 238 100 41];
+            app.RecordDAQ.Text = 'Record DAQ';
+
+            % Create PhaserCalculation
+            app.PhaserCalculation = uibutton(app.DataAnalysisTab, 'push');
+            app.PhaserCalculation.ButtonPushedFcn = createCallbackFcn(app, @PhaserCalculationPushed, true);
+            app.PhaserCalculation.BackgroundColor = [1 1 0.0667];
+            app.PhaserCalculation.Position = [486 15 116 37];
+            app.PhaserCalculation.Text = 'Phaser Calculation';
+
+            % Create PowerFactorEditFieldLabel
+            app.PowerFactorEditFieldLabel = uilabel(app.DataAnalysisTab);
+            app.PowerFactorEditFieldLabel.HorizontalAlignment = 'right';
+            app.PowerFactorEditFieldLabel.Position = [328 62 77 22];
+            app.PowerFactorEditFieldLabel.Text = 'Power Factor';
+
+            % Create PowerFactor
+            app.PowerFactor = uieditfield(app.DataAnalysisTab, 'numeric');
+            app.PowerFactor.Position = [420 62 100 22];
+
+            % Create PhasedegreesLabel
+            app.PhasedegreesLabel = uilabel(app.DataAnalysisTab);
+            app.PhasedegreesLabel.HorizontalAlignment = 'right';
+            app.PhasedegreesLabel.Position = [311 97 94 22];
+            app.PhasedegreesLabel.Text = 'Phase (degrees)';
+
+            % Create Phase
+            app.Phase = uieditfield(app.DataAnalysisTab, 'numeric');
+            app.Phase.Position = [420 97 100 22];
+
+            % Create RMSVoltageVEditFieldLabel
+            app.RMSVoltageVEditFieldLabel = uilabel(app.DataAnalysisTab);
+            app.RMSVoltageVEditFieldLabel.HorizontalAlignment = 'right';
+            app.RMSVoltageVEditFieldLabel.Position = [529 62 95 22];
+            app.RMSVoltageVEditFieldLabel.Text = 'RMS Voltage (V)';
+
+            % Create RMSVoltage
+            app.RMSVoltage = uieditfield(app.DataAnalysisTab, 'numeric');
+            app.RMSVoltage.Position = [639 62 100 22];
+
+            % Create RMSCurrentAEditFieldLabel
+            app.RMSCurrentAEditFieldLabel = uilabel(app.DataAnalysisTab);
+            app.RMSCurrentAEditFieldLabel.HorizontalAlignment = 'right';
+            app.RMSCurrentAEditFieldLabel.Position = [529 97 95 22];
+            app.RMSCurrentAEditFieldLabel.Text = 'RMS Current (A)';
+
+            % Create RMSCurrent
+            app.RMSCurrent = uieditfield(app.DataAnalysisTab, 'numeric');
+            app.RMSCurrent.Position = [639 97 100 22];
+
+            % Create CollectionTimesecEditFieldLabel_2
+            app.CollectionTimesecEditFieldLabel_2 = uilabel(app.DataAnalysisTab);
+            app.CollectionTimesecEditFieldLabel_2.HorizontalAlignment = 'right';
+            app.CollectionTimesecEditFieldLabel_2.Position = [77 207 118 22];
+            app.CollectionTimesecEditFieldLabel_2.Text = 'Collection Time (sec)';
+
+            % Create DataTime
+            app.DataTime = uieditfield(app.DataAnalysisTab, 'numeric');
+            app.DataTime.Position = [210 207 62 22];
+            app.DataTime.Value = 0.5;
+
+            % Create SaveDataButton
+            app.SaveDataButton = uibutton(app.DataAnalysisTab, 'push');
+            app.SaveDataButton.ButtonPushedFcn = createCallbackFcn(app, @SaveDataButtonPushed, true);
+            app.SaveDataButton.BackgroundColor = [0.502 0.502 0.502];
+            app.SaveDataButton.Position = [39 247 74 23];
+            app.SaveDataButton.Text = 'Save Data';
+        end
+    end
+
+    methods (Access = public)
+
+        % Construct app
+        function app = SmartGrid_exported
+
+            % Create and configure components
+            createComponents(app)
+
+            % Register the app with App Designer
+            registerApp(app, app.SMARTGRIDUIFigure)
+
+            if nargout == 0
+                clear app
+            end
+        end
+
+        % Code that executes before app deletion
+        function delete(app)
+
+            % Delete UIFigure when app is deleted
+            delete(app.SMARTGRIDUIFigure)
+        end
+    end
+end
+##### SOURCE END #####
+--></body></html>
